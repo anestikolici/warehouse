@@ -1,9 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
+
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">Menu</div>
+
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/sales">Sales</a></li>
+                        <li><a href="/deliveries">Deliveries</a></li>
+                        <li><a href="/stock">Stock Management</a></li>
+                        <li><a href="/products">Products</a></li>
+                        @if(auth()->user()['type'] == 'manager')
+                            <li><a href="{{ route('register') }}">Register new User</a></li>
+                        @endif
+                        <ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
 
@@ -61,6 +82,7 @@
                             </div>
                         </div>
 
+                        <input id="type" type="hidden" class="form-control" name="type" value="employee">
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

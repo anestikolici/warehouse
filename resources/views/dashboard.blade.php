@@ -20,6 +20,9 @@
                         <li><a href="/deliveries">Deliveries</a></li>
                         <li><a href="/stock">Stock Management</a></li>
                         <li><a href="/products">Products</a></li>
+                        @if(auth()->user()->type == 'manager')
+                            <li><a href="{{ route('register') }}">Register new User</a></li>
+                        @endif
                         <ul>
                 </div>
             </div>
@@ -41,7 +44,7 @@
                         </div>
                         <div class="col-md-6 text-center">
                             <h4>{{ $sales_data }}</h4>
-                            <h5>Total sales</h5>
+                            <h5>Total Products Sold</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -50,8 +53,8 @@
                             <h5>Total deliveries</h5>
                         </div>
                         <div class="col-md-6 text-center">
-                            <h4>{{ $stock_data }}</h4>
-                            <h5>Total SKUs</h5>
+                            <h4>{{ $display_sales }}</h4>
+                            <h5>Total Sales</h5>
                         </div>
                     </div>
                 </div>

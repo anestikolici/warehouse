@@ -28,10 +28,26 @@ class DashboardController extends Controller
     public function index()
     {   
         $sales_data = Sales::with("sales")->count();
+
+        $sales_total = Sales::all();
+        $priceProduct= Products::all();
+
+        $display_sales=0;
+        for($i=0;$i<$sales_total->count();$i++){
+
+            $quantity= $sales_total[$i]['quantity'];
+
+            $price= $priceProduct->find($sales_total[$i]['product_id'])['price'];
+
+            $total_price=$quantity*$price;
+            $display_sales=$display_sales+$total_price;
+
+        }
+
+
         $deliveries_data = Deliveries::with("deliveries")->count();
-        $stock_data = Stocks::with("stock")->count();
         $products_data = Products::with("products")->count();
 
-        return view("dashboard", compact("sales_data", "deliveries_data", "stock_data", "products_data"));
+        return view("dashboard", compact("sales_data", "sales_data", "deliveries_data", "display_sales", "products_data"));
     }
 }

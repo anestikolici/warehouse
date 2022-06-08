@@ -14,7 +14,9 @@
                         <li><a href="/deliveries">Deliveries</a></li>
                         <li><a href="/stock">Stock Management</a></li>
                         <li><a href="/products">Products</a></li>
-
+                        @if(auth()->user()->type == 'manager')
+                            <li><a href="{{ route('register') }}">Register new User</a></li>
+                        @endif
                         <ul>
                 </div>
             </div>
@@ -82,11 +84,13 @@
                                             <a href="{{ route('stock.edit', $stock->id) }}" class="btn btn-primary">Edit</a>
                                         </td>
                                         <td>
+                                            @if(auth()->user()['type']=='manager')
                                             <form action="{{ route('stock.destroy', $stock->id)}}" method="POST">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button class="btn btn-danger" type="submit">Delete</button>
                                             </form>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
